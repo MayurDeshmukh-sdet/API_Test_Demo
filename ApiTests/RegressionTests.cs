@@ -48,6 +48,13 @@ namespace ApiTests
         public void DeleteUSer()
         {
             
+            var deleteHelper = new APIHelper<CreateUserDataTransfer>();
+            var deleteUrl = deleteHelper.SetUrl($"/objects/{createdUser.Id}");
+            var deleteRequest = deleteHelper.CreateDeleteRequest();
+            var deleteResponse = deleteHelper.GetResponse(deleteUrl, deleteRequest);
+
+            // Step 3: Verify status code
+            Assert.AreEqual(System.Net.HttpStatusCode.NoContent, deleteResponse.StatusCode);
 
         }
     }
